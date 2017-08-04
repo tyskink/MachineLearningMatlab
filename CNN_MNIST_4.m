@@ -102,9 +102,9 @@ accuracy = sum(YPred==YTest)/numel(YTest)
 % accuracy = sum(YPred==YTest)/numel(YTest)
 
 % see the features on every layer
-    % features = activations(convnet,te_x4d_scale(:,:,1,1),1)%ImageInput
-    % im=(reshape(features,28,28))
-    % imshow(im)
+%     features = activations(convnet,te_x4d_scale(:,:,1,1),1)%ImageInput
+%     im=(reshape(features,28,28))
+%     imshow(im)
 
 %     features = activations(convnet,te_x4d_scale(:,:,1,1),2)%Conv
 %     im=(reshape(features,24,24))
@@ -143,13 +143,17 @@ accuracy = sum(YPred==YTest)/numel(YTest)
     %features = activations(convnet,te_x4d_scale(:,:,1,1),1)
     %features_1=(reshape(features,28,28))
     %features_2=te_x4d_scale(:,:,1,1)-zerocenter
-    %features_21=te_x4d_scale(:,:,1,1)+zerocenter  %is correct
+%     features_21=te_x4d_scale(:,:,1,1)+zerocenter  %is correct
     
 %     zerocenter_double=double(zerocenter)
 %     file=fopen('C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\Zc.lkd','w')
 %     fwrite(file,zerocenter_double','double')
 %     fclose(file)
-    
+
+%save zero-center to file
+%     file=fopen('C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\Zc.lkf','w')
+%     fwrite(file,zerocenter','single')
+%     fclose(file)
 %save kernel on C1
 % for index=1:6
 %     C1=double(convnet.Layers(2,1).Weights(:,:,1,index))
