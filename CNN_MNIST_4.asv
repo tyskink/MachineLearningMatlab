@@ -107,7 +107,7 @@ accuracy = sum(YPred==YTest)/numel(YTest)
 %     imshow(im)
 
 %     features = activations(convnet,te_x4d_scale(:,:,1,1),2)%Conv
-%     im=(reshape(features,24,24,6))
+%     im=(reshape(features,24,24))
 %     imshow(im)
 
 %     features = activations(convnet,te_x4d_scale(:,:,1,1),3) %ReLu
@@ -230,11 +230,12 @@ accuracy = sum(YPred==YTest)/numel(YTest)
 % fclose(file)
 
 % Save to File: single
+%   F5W=convnet.Layers(5,1).Weights;
 % file=fopen(['C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\F5W.lkf'],'w')
 % fwrite(file,F5W','single')
 % fclose(file)
-% F5B=convnet.Layers(5,1).Bias;
-% file=fopen(['C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\F5B.lkf'],'w')
-% fwrite(file,F5B','single')
-% fclose(file)
+F5B=convnet.Layers(5,1).Bias);
+file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\F5B.lkd'],'w')
+fwrite(file,F5B','double')
+fclose(file)
 
