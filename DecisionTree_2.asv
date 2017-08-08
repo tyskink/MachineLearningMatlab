@@ -27,31 +27,6 @@ sum(testPro);
 IndexofTree=1:4631;
 IndexofTree=IndexofTree.*ENDindex;
 
-depth=zeros(1,4631);
-for xx=1:4631
-    if(Mdl.IsBranchNode(xx)==0)
-        node=Mdl.Parent(xx);
-        while node~=0
-            depth(xx) = depth(xx) + 1;
-            node = Mdl.Parent(node);
-        end
-    end
-end
-
-
-WeightedAverageDepth=depth'.*testPro;
-sum(WeightedAverageDepth);%==22.7967
-sum(Mdl.IsBranchNode)%==2315   branch number=2316
-
-sumdepth=0;
-for xx=1:4631
-    
-    if(depth(xx)~=0)
-        sumdepth=sumdepth+depth(xx);
-    end
-end
-% sumdepth-33271
-%average depth=14.3657
 
 
 
