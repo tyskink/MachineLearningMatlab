@@ -2,9 +2,11 @@
     %according to %KNN_1
     
 load MNIST_all_single.mat 
-X=tr_x_255;
+X=tr_x_scale;
 Y=tr_y;
-Mdl = fitctree(X,Y)
+
+%Mdl = fitctree(X,Y)
+Mdl= fitctree(X,Y,'CrossVal','on')
 
 view(Mdl)
 view(Mdl,'mode','graph')
