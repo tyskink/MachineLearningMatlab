@@ -48,4 +48,56 @@ YPred = classify(convnet,tr_x4d_scale);
 YTest = tr_y_ca;
 accuracy = sum(YPred==YTest)/numel(YTest)    
 
+pause;
 
+%   get the zero-center parameters
+    im=zeros(28,28)
+    im4d(:,:,1,1)=im
+    features = activations(convnet,im4d,1)
+    im=(reshape(features,28,28))
+    zerocenter=im
+    zerocenter=int32(zerocenter*255)
+    
+    file=fopen('C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\Zc.lki','w')
+    fwrite(file,zerocenter','int32')
+    fclose(file)
+    
+%	save kernel on C1    
+for index=1:6
+    C1=int32(convnet.Layers(2,1).Weights(:,:,1,index)*255)
+    file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\C1','K',num2str(index),'.lki'],'w')
+    fwrite(file,C1','int32')
+    fclose(file)
+end    
+    
+%save bias on C1
+for index=1:6
+    C1B(index)=int32(convnet.Layers(2,1).Bias(1,1,index)*255)
+end
+file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\C1B.lki'],'w')
+fwrite(file,C1B','int32')
+fclose(file)    
+    
+%convert the matlab FC matrix to C order
+F5W=zeros(10,784);
+i=1;
+    for IM=1:6
+        for IL=1:12
+            for IC=1:12
+                F5W(:,(IM-1)*144+IL+(IC-1)*12)=convnet.Layers(5,1).Weights(:,i);
+                i=i+1;
+            end
+        end       
+    end
+% Save to File
+ 
+F5W=int32(F5W*255);
+file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\F5W.lki'],'w')
+fwrite(file,F5W','int32')
+fclose(file)
+F5B=int32(convnet.Layers(5,1).Bias*255);
+file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\F5B.lki'],'w')
+fwrite(file,F5B','int32')
+fclose(file)
+    
+    
