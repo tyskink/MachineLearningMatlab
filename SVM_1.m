@@ -17,3 +17,5 @@ Y=tr_y;
 t = templateSVM('KernelFunction','gaussian');
 Mdl = fitcecoc(X,Y,...
     'Learners',t);
+
+
