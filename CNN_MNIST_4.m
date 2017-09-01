@@ -102,139 +102,139 @@ accuracy = sum(YPred==YTest)/numel(YTest)
 % accuracy = sum(YPred==YTest)/numel(YTest)
 
 % see the features on every layer
-%     features = activations(convnet,te_x4d_scale(:,:,1,1),1)%ImageInput
-%     im=(reshape(features,28,28))
-%     imshow(im)
+    features = activations(convnet,te_x4d_scale(:,:,1,1),1)%ImageInput
+    im=(reshape(features,28,28))
+    imshow(im)
 
-%     features = activations(convnet,te_x4d_scale(:,:,1,1),2)%Conv
-%     im=(reshape(features,24,24,6))
-%     imshow(im)
+    features = activations(convnet,te_x4d_scale(:,:,1,1),2)%Conv
+    im=(reshape(features,24,24,6))
+    imshow(im)
 
-%     features = activations(convnet,te_x4d_scale(:,:,1,1),3) %ReLu
-%     im=(reshape(features,24,24))
-%     imshow(im)
+    features = activations(convnet,te_x4d_scale(:,:,1,1),3) %ReLu
+    im=(reshape(features,24,24))
+    imshow(im)
 
-%     features = activations(convnet,te_x4d_scale(:,:,1,1),4) %MaxPolling
-%     im=(reshape(features,12,12,6))
-%     imshow(im(:,:,1))
+    features = activations(convnet,te_x4d_scale(:,:,1,1),4) %MaxPolling
+    im=(reshape(features,12,12,6))
+    imshow(im(:,:,1))
     
-%     features = activations(convnet,te_x4d_scale(:,:,1,1),5) %FC
-%     im=(reshape(features,24,24))
-%     imshow(im)    
-%    features'-convnet.Layers(5,1).Bias
+    features = activations(convnet,te_x4d_scale(:,:,1,1),5) %FC
+    im=(reshape(features,24,24))
+    imshow(im)    
+    features'-convnet.Layers(5,1).Bias
 
-%   features = activations(convnet,te_x4d_scale(:,:,1,1),6) %SoftMax
+    features = activations(convnet,te_x4d_scale(:,:,1,1),6) %SoftMax
     
 % find out a specific value
-    % fa=features((features>0.22263))
-    % fb=fa((fa<0.22264))
+    fa=features((features>0.22263))
+    fb=fa((fa<0.22264))
 
-    % tr_x4d_scale(:,:,1,1)-mean(mean(tr_x4d_scale(:,:,1,1)))
+    tr_x4d_scale(:,:,1,1)-mean(mean(tr_x4d_scale(:,:,1,1)))
 
 
 %get the zero-center parameters
-%     im=zeros(28,28)
-%     im4d(:,:,1,1)=im
-%     features = activations(convnet,im4d,1)
-%     im=(reshape(features,28,28))
-%     zerocenter=im
+    im=zeros(28,28)
+    im4d(:,:,1,1)=im
+    features = activations(convnet,im4d,1)
+    im=(reshape(features,28,28))
+    zerocenter=im
     
     %test
-    %features = activations(convnet,te_x4d_scale(:,:,1,1),1)
-    %features_1=(reshape(features,28,28))
-    %features_2=te_x4d_scale(:,:,1,1)-zerocenter
-%     features_21=te_x4d_scale(:,:,1,1)+zerocenter  %is correct
+    features = activations(convnet,te_x4d_scale(:,:,1,1),1)
+    features_1=(reshape(features,28,28))
+    features_2=te_x4d_scale(:,:,1,1)-zerocenter
+    features_21=te_x4d_scale(:,:,1,1)+zerocenter  %is correct
     
-%     zerocenter_double=double(zerocenter)
-%     file=fopen('C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\Zc.lkd','w')
-%     fwrite(file,zerocenter_double','double')
-%     fclose(file)
+    zerocenter_double=double(zerocenter)
+    file=fopen('C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\Zc.lkd','w')
+    fwrite(file,zerocenter_double','double')
+    fclose(file)
 
 %save zero-center to file: Single
-%     file=fopen('C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\Zc.lkf','w')
-%     fwrite(file,zerocenter','single')
-%     fclose(file)
+    file=fopen('C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\Zc.lkf','w')
+    fwrite(file,zerocenter','single')
+    fclose(file)
 
 
 %save kernel on C1
-% for index=1:6
-%     C1=double(convnet.Layers(2,1).Weights(:,:,1,index))
-%     file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\C1','K',num2str(index),'.lkd'],'w')
-%     fwrite(file,C1','double')
-%     fclose(file)
-% end
+for index=1:6
+    C1=double(convnet.Layers(2,1).Weights(:,:,1,index))
+    file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\C1','K',num2str(index),'.lkd'],'w')
+    fwrite(file,C1','double')
+    fclose(file)
+end
 
 %save kernel on C1:single
-% for index=1:6
-%     C1=convnet.Layers(2,1).Weights(:,:,1,index)
-%     file=fopen(['C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\C1','K',num2str(index),'.lkf'],'w')
-%     fwrite(file,C1','single')
-%     fclose(file)
-% end
+for index=1:6
+    C1=convnet.Layers(2,1).Weights(:,:,1,index)
+    file=fopen(['C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\C1','K',num2str(index),'.lkf'],'w')
+    fwrite(file,C1','single')
+    fclose(file)
+end
 
 %save bias on C1
-% for index=1:6
-%     C1B(index)=double(convnet.Layers(2,1).Bias(1,1,index))
-% end
-% file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\C1B.lkd'],'w')
-% fwrite(file,C1B','double')
-% fclose(file)
+for index=1:6
+    C1B(index)=double(convnet.Layers(2,1).Bias(1,1,index))
+end
+file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\C1B.lkd'],'w')
+fwrite(file,C1B','double')
+fclose(file)
 %save bias on C1: single
-% for index=1:6
-%     C1B(index)=convnet.Layers(2,1).Bias(1,1,index)
-% end
-% file=fopen(['C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\C1B.lkf'],'w')
-% fwrite(file,C1B','single')
-% fclose(file)
+for index=1:6
+    C1B(index)=convnet.Layers(2,1).Bias(1,1,index)
+end
+file=fopen(['C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\C1B.lkf'],'w')
+fwrite(file,C1B','single')
+fclose(file)
 
 
 %convert the matlab FC matrix to C order
-% F5W=zeros(10,784);
-% i=1;
-%     for IM=1:6
-%         for IL=1:12
-%             for IC=1:12
-%                 F5W(:,(IM-1)*144+IL+(IC-1)*12)=convnet.Layers(5,1).Weights(:,i);
-%                 i=i+1;
-%             end
-%         end       
-%     end
+F5W=zeros(10,784);
+i=1;
+    for IM=1:6
+        for IL=1:12
+            for IC=1:12
+                F5W(:,(IM-1)*144+IL+(IC-1)*12)=convnet.Layers(5,1).Weights(:,i);
+                i=i+1;
+            end
+        end       
+    end
 
-% for i=1:864
-%  F5W(:,A(i))=convnet.Layers(5,1).Weights(:,i);
-% end
+for i=1:864
+ F5W(:,A(i))=convnet.Layers(5,1).Weights(:,i);
+end
 
 %Test the Correct Order
-%     features = activations(convnet,te_x4d_scale(:,:,1,1),4); %MaxPolling     1*864
-%     convnet.Layers(5,1).Weights*features'
-%     activations(convnet,te_x4d_scale(:,:,1,1),5) %FC
+    features = activations(convnet,te_x4d_scale(:,:,1,1),4); %MaxPolling     1*864
+    convnet.Layers(5,1).Weights*features'
+    activations(convnet,te_x4d_scale(:,:,1,1),5) %FC
     %this result is correct
     
     %the order in C: features
-%     features = activations(convnet,te_x4d_scale(:,:,1,1),4); %MaxPolling     1*864
-%     im=(reshape(features,12,12,6));%the same as the result of C
-%     for index=1:6
-%     Corder(1+(index-1)*144:144+(index-1)*144)=reshape(im(:,:,index)',[],1);
-%     end
-%   F5W*Corder' %Correct!
+    features = activations(convnet,te_x4d_scale(:,:,1,1),4); %MaxPolling     1*864
+    im=(reshape(features,12,12,6));%the same as the result of C
+    for index=1:6
+    Corder(1+(index-1)*144:144+(index-1)*144)=reshape(im(:,:,index)',[],1);
+    end
+  F5W*Corder' %Correct!
     
 % Save to File
 %   F5W=convnet.Layers(5,1).Weights;
-% F5W=double(F5W);
-% file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\F5W.lkd'],'w')
-% fwrite(file,F5W','double')
-% fclose(file)
-% F5B=double(convnet.Layers(5,1).Bias);
-% file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\F5B.lkd'],'w')
-% fwrite(file,F5B','double')
-% fclose(file)
+F5W=double(F5W);
+file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\F5W.lkd'],'w')
+fwrite(file,F5W','double')
+fclose(file)
+F5B=double(convnet.Layers(5,1).Bias);
+file=fopen(['C:\Users\kongq\Desktop\machine_learning_ex\CNN_ZcCoReSuFuSm\F5B.lkd'],'w')
+fwrite(file,F5B','double')
+fclose(file)
 
 % Save to File: single
-% file=fopen(['C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\F5W.lkf'],'w')
-% fwrite(file,F5W','single')
-% fclose(file)
-% F5B=convnet.Layers(5,1).Bias;
-% file=fopen(['C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\F5B.lkf'],'w')
-% fwrite(file,F5B','single')
-% fclose(file)
+file=fopen(['C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\F5W.lkf'],'w')
+fwrite(file,F5W','single')
+fclose(file)
+F5B=convnet.Layers(5,1).Bias;
+file=fopen(['C:\Users\kongq\Desktop\MachineLearningMatlab\CNN_ZcCoReSuFuSm\F5B.lkf'],'w')
+fwrite(file,F5B','single')
+fclose(file)
 
