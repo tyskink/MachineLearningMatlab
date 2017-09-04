@@ -8,12 +8,9 @@ Mdl= fitctree(X,Y)
 view(Mdl)
 view(Mdl,'mode','graph')
 
-
-
 YPred=predict(Mdl,tr_x_255);
 YTest=tr_y;
 accuracy = sum(YPred==YTest)/numel(YTest)   %   0.9678
-
 
 YPred=predict(Mdl,te_x_255(:,:));
 YTest=te_y;
@@ -38,7 +35,6 @@ for xx=1:4631
     end
 end
 
-
 WeightedAverageDepth=depth'.*testPro;
 sum(WeightedAverageDepth);%==22.7967
 sum(Mdl.IsBranchNode)%==2315   branch number=2316
@@ -53,16 +49,11 @@ end
 % sumdepth-33271
 %average depth=14.3657
 
-
-
-
 function [indexofend]=treeEnd(tree)
 
 
     tree.Children
 end
-
-
 
 %Maxdepth of a branch
 function Maxdepth = treedepth(tree)
